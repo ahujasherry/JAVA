@@ -26,7 +26,7 @@ public class DuplicateNumber
 	
 
 	
-	//1. Bit manipulation
+	//1. Bit manipulation but overflow occurs. Because int is 32bits or max 64 but range could be liek 3*10^4
 	public int bitMan()
 	{
 			
@@ -36,11 +36,11 @@ public class DuplicateNumber
 			int ele=list.get(i);
 			
 			//checking the set bits if any
-			int set_bit=a & (1 << (ele-1) );
+			int set_bit= a & (1 << (ele) );
 			
 			if( set_bit> 0 ) return ele ; 
 		
-			a= a | ( 1 << (ele-1) );
+			a= a | ( 1 << (ele) );
 		}
 		
 		
@@ -75,18 +75,43 @@ public class DuplicateNumber
 		return ;
 	}
 	
+	
+	//3. Find linked list cycle,  The cycle appears because nums contains duplicates. The duplicate node is a cycle entrance.
+	public int findCycle()
+	{
+			
+		 int slow = list.get(0);
+		 int fast = list.get(0);
+		 
+	    do {
+		      slow= list.get(slow);
+		      fast=list.get(list.get(fast));
+		     
+		    } while (slow != fast);
+
+		    // Find the "entrance" to the cycle.
+	    	slow=list.get(0);
+		    while (slow != fast) {
+		    	slow= list.get(slow);
+			    fast=list.get(fast);
+		    }
+
+		    return fast;
+		  
+	}
+	
 
 	public static void main(String[] args) 
 	{
 	
 			DuplicateNumber obj=new DuplicateNumber();
-			int arr[] = {1, 2, 2, 4}; 
+			int arr[] = {13,46,8,11,20,17,40,13,13,13,14,1,13,36,48,41,13,13,13,13,45,13,28,42,13,10,15,22,13,13,13,13,23,9,6,13,47,49,16,13,13,39,35,13,32,29,13,25,30,13};
 			for (int i : arr) 
 			{
 				obj.list.add(i);
 			}
 			
-			obj.DupFreq();
+			System.out.println(obj.findCycle());
 	}
 
 }
