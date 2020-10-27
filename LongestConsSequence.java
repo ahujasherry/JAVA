@@ -63,12 +63,12 @@ public class LongestConsSequence
 	    public static int findLongestConseqSubseq(int arr[])
 	    {
 	    	int n=arr.length;
-	        HashSet<Integer> S = new HashSet<Integer>();
-	        int ans = 0;
+	        HashSet<Long> S = new HashSet<Long>();
+	        long ans = 0;
 	 
 	        //adding all elements to hash set
 	        for (int i = 0; i < n; ++i)
-	            S.add(arr[i]);
+	            S.add((long)arr[i]);
 	 
 	        // check each possible sequence from the start
 	        // then update optimal length
@@ -78,7 +78,7 @@ public class LongestConsSequence
 	            if (!S.contains(arr[i] - 1)) {
 	                // Then check for next elements
 	                // in the sequence
-	                int j = arr[i];
+	            	long j = arr[i];
 	                while (S.contains(j))
 	                    j++;
 	 
@@ -87,13 +87,13 @@ public class LongestConsSequence
 	                    ans = j - arr[i];
 	            }
 	        }
-	        return ans;
+	        return (int)ans;
 	    }
 	
 	public static void main(String[] args) 
 	{
 		LongestConsSequence obj=new LongestConsSequence();
-		int arr[]=new int[] {0,1,1,2,3};
+		int arr[]=new int[] {2147483647,-2147483648};
 		System.out.println(obj.findLongestConseqSubseq(arr));
 
 	}
