@@ -13,24 +13,28 @@ public class DeleteNthNodeFromEnd
         } 
     } 
   
-	Node deleteNode(int key) 
+	Node deleteNode(int k) 
     { 
-    Node start = new Node(0);
-    Node slow = start, fast = start;
-    slow.next = head;
+
+        if((head==null) | (head.next==null && k==1)) return null;
+        Node slow = head, fast = head;
+    
     
     //Move fast in front so that the gap between slow and fast becomes n
-    for(int i=1; i<=key+1; i++)   {
+    for(int i=1; i<=k; i++)   {
         fast = fast.next;
     }
     //Move fast to the end, maintaining the gap
-    while(fast != null) {
+    while(fast!=null && fast.next != null) 
+    {
+        
         slow = slow.next;
         fast = fast.next;
     }
-    //Skip the desired node
+        if(fast==null) return head.next;
+    
     slow.next = slow.next.next;
-    return start.next;
+    return head;
         
 
     } 
@@ -61,10 +65,7 @@ public class DeleteNthNodeFromEnd
         llist.push(5); 
         llist.push(4); 
 
-        llist.push(3); 
-        llist.push(2); 
-        llist.push(1);
-  
+       
         System.out.println("\nCreated Linked list is:"); 
         llist.printList(); 
   
