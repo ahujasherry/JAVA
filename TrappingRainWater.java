@@ -55,6 +55,24 @@ public class TrappingRainWater
 	{
 		int res=0;
 		
+		//left and right array contains left max and right max includig that ith element -> pre computed 
+		int left[] = new int[n]; 
+		int right[] = new int[n]; 
+		
+		//populate left array
+		left[0] = arr[0]; 
+        for (int i = 1; i < n; i++) 
+            left[i] = Math.max(left[i - 1], arr[i]);
+        
+        //populate right array
+        right[n - 1] = arr[n - 1]; 
+        for (int i = n - 2; i >= 0; i--) 
+            right[i] = Math.max(right[i + 1], arr[i]); 
+        
+        //find height of water stored for each index
+        for (int i = 0; i < n; i++) 
+            res += Math.min(left[i], right[i]) - arr[i]; 
+		
 		
 		return res; 
 	}
@@ -65,7 +83,29 @@ public class TrappingRainWater
                  1, 3, 2, 1, 2, 1 }; 
 		 int n = arr.length; 
  
-		 System.out.print(maxWaterTwoPointers(arr,n)); 
+		 System.out.print(maxWater(arr,n)); 
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
