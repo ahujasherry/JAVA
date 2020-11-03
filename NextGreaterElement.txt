@@ -1,0 +1,57 @@
+
+/*
+You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
+
+The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, output -1 for this number.
+
+*/
+import java.util.*;
+class NextGreaterElement
+{
+    //S.C -> O(n2)
+    //T.C worst case -> O(n1*n2)
+    public int[] nextGreaterElement(int[] arr1, int[] arr2) 
+    {
+        //base case
+        if(arr1.length==0) return arr1 ;
+        
+        //stores value and index of arr2 elements for O(1) search time
+        Map<Integer,Integer> map=new HashMap<Integer,Integer>();
+        
+        //resultant array and its index
+        int res[]=new int[arr1.length];
+        int index=0;
+        
+        
+        //put arr2 in hashmap 
+        for(int i=0;i<arr2.length;i++)
+        {
+            map.put(arr2[i],i);
+        }
+        
+       
+        //take each element of arr1 and find its pos in arr2 using map
+        // from its next element to last index, find next greater element
+        for (int i=0; i<arr1.length; i++) 
+        { 
+            int ele_index=map.get(arr1[i]); //3
+            int next=-1;
+            for (int j = ele_index+1; j<arr2.length; j++) 
+            { 
+                if (arr1[i] < arr2[j]) 
+                { 
+                     
+                    next=arr2[j];
+                    res[index++]=next;
+                    break;
+                } 
+            } 
+            
+            if(next==-1)
+                res[index++]=next;
+          
+        }
+        
+        return res;
+    }
+}
