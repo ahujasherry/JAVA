@@ -77,6 +77,7 @@ public class DuplicateNumber
 	
 	
 	//3. Find linked list cycle,  The cycle appears because nums contains duplicates. The duplicate node is a cycle entrance.
+	// arr[0] is always entrance of the cycle because there wont be any zero in element which will point back to first index and numbers start from 1. Also, there could be multiple cycle in one graph
 	public int findCycle()
 	{
 			
