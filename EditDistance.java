@@ -68,3 +68,51 @@ static int editDist(String str1, String str2, int m,
  
         return dp[m][n];
     }
+
+    //space : O(m)
+    public int minDistance(String str1, String str2)
+    {
+        
+        
+        int len1=str1.length();
+        int len2=str2.length();
+        
+        if(len1==0) return len2;
+        if(len2==0) return len1;
+        
+        int dp[][] = new int[2][len1+1];
+ 
+        // Base condition when second String
+        // is empty then we remove all characters
+        for (int j = 0; j <= len1; j++)
+          dp[0][j] = j;
+        
+        //for every character in str2
+        for (int i = 1; i <=len2 ; i++)
+        {
+            //for every char in str1
+            for (int j = 0; j <= len1 ; j++) 
+            {
+                // if first String is empty then
+                // we have to perform add character
+                // operation to get second String
+                if (j == 0)
+                    dp[i%2][j] = i; // Min. operations = i
+ 
+                else if (str1.charAt(j - 1) == str2.charAt(i - 1)) {
+                        dp[i % 2][j] = dp[(i - 1) % 2][j - 1];
+            }
+ 
+                else
+                {
+                    dp[i % 2][j] = 1 + Math.min(dp[(i - 1) % 2][j],
+                                       Math.min(dp[i % 2][j - 1],
+                                           dp[(i - 1) % 2][j - 1]));
+                    
+                }
+                     
+            }
+        
+    }
+        return dp[len2%2][len1];
+    }
