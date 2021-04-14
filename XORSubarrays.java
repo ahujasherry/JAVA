@@ -18,15 +18,17 @@ public int subXOR(int a[], int k)
 	{
 		xor=xor^ a[i];
 		
+		//if the whole subarray makes xor==k
 		if( xor == k) count++;
 		
 		
-		
+		//find count of y for that subarray if it exists in map
 		if(map.get(xor ^k)!=null ) 
 		{
 			count+=map.get(xor ^k);
 		}
 
+		//put pre sum in map
 		if(map.get(xor)!=null)
 		{
 			map.put(xor,map.get(xor)+1);
