@@ -1,63 +1,72 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution 
-{
-    
-    
-    public TreeNode buildTree(int[] preorder, int[] inorder) 
+class block {
+    int data;
+    block left, right;
+ 
+    public block(int data)
     {
-        HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
-        
-        //put inorder indeces in hashmap
-        for(int i=0;i<inorder.length;i++)
-        {
-            map.put(inorder[i],i);
-        }
-        
-        int len=inorder.length;
-        
-        
-        TreeNode root=buildHelper(0,preorder, inorder, 0 ,len-1,map);
-        return root;
-        
+        this.data = data;
+        left = right = null;
     }
-    
-    public static TreeNode buildHelper(int preStart,int[] preorder, int[] inorder, int start, int end,HashMap<Integer,Integer> map)
+}
+ 
+class InorderPreorderBT {
+   static int preStart;
+    public InorderPreorderBT(int n)
     {
-        //if preStart of preorder goes out of bound after jump or inorder goes out of bound
-        if((start > end) ||( preStart > preorder.length-1) ) return null;
+        preStart=0;
+    }
+    public block buildUtil(int in[], int pre[], int inStrt,
+                   int inEnd)
+    {
+        if (inStrt > inEnd)
+            return null;
+ 
+        block node = new block(pre[preStart++]);
+ 
+        if (inStrt == inEnd)
+            return node;
         
-        //make prestart array element as root
-        TreeNode node= new TreeNode(preorder[preStart]);
-        
-        //if leaf node
-        if(start == end ) return node;
-        
-        //get index of inorder of node from map
-        int inIndex=map.get(node.val);
-        
-        //left subtree will be inorder index left and right will be its right
-        //prestart index of left subtree is preStart +1
-        node.left=buildHelper(preStart+1,preorder,inorder,start,inIndex-1,map);
+        int iIndex = search(in, inStrt, inEnd, node.data);
+ 
+          node.left = buildUtil(in, pre, inStrt, iIndex - 1);
+         node.right= buildUtil(in, pre, iIndex + 1, inEnd);
+
        
-        //right subtree will be inorder index right
-        //prestart index of right subtree is preStart index + num of nodes left to inorder              index from inorder start
-        node.right=buildHelper(preStart+inIndex-start+1,preorder,inorder,inIndex+1,end,map);
+           
         
         return node;
+    }
+ 
+    
+    int search(int arr[], int strt, int end, int value)
+    {
+        int i;
+        for (i = strt; i <= end; i++) {
+            if (arr[i] == value)
+                break;
+        }
+        return i;
+    }
+ 
+    void preOrder(block node)
+    {
+        if (node == null)
+            return;
+        System.out.print(node.data + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+ 
+    public static void main(String[] args)
+    {
+        int in[] = new int[] { 4, 8, 2, 5, 1, 6, 3, 7 };
+        int pre[] = new int[] { 8, 4, 5, 2, 6, 7, 3, 1 };
+        int n = in.length;
+        InorderPreorderBT tree = new InorderPreorderBT(n);
         
+        block root= tree.buildUtil(in, post, 0, n - 1);
+        System.out.println(
+            "Preorder of the constructed tree : ");
+        tree.preOrder(root);
     }
 }
