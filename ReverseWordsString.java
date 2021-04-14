@@ -47,7 +47,7 @@ class Solution {
             
             
         }
-        return (sb.length()>0)?                 sb.deleteCharAt(0).toString():sb.toString();
+        return (sb.length()>0)? sb.deleteCharAt(0).toString():sb.toString();
     }
     
 }
