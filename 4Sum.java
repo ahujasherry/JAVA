@@ -1,3 +1,11 @@
+
+/*
+    n2 -> store all pair sum in hash(n2). again traverse pairs and check for remaining sum. 
+    keep check of all distinct elements. To handle duplicate, keep separate temp array as visited one
+    
+*/
+
+//n3 T.c
 class Solution 
 {
     public List<List<Integer>> fourSum(int[] nums, int target) 
