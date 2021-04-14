@@ -30,7 +30,7 @@ class Solution {
         
         if(left.val == right.val) 
         {
-            return isSymmetricHelper(left.left,right.right) &&                                                       isSymmetricHelper(left.right,right.left);
+            return isSymmetricHelper(left.left,right.right) && isSymmetricHelper(left.right,right.left)                                                       isSymmetricHelper(left.right,right.left);
         }
         
         return false;
