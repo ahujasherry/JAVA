@@ -18,7 +18,9 @@ public static boolean wordBreak(String word)
   
             if (dictionary.contains(word.substring(0,i)) &&  
                     wordBreak(word.substring(i,size))) 
-            return true; 
+            return true;
+        }
+        return false;
 }
 
 
