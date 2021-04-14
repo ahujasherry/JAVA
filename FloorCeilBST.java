@@ -39,8 +39,8 @@ public class FloorCeilBST
 		if(root.val < key)
 		{
 			int ans=floor(root.right, key);
-			return (ans<= key && ans!=-1) ? ans : root.val)
-			 return Ceil(root.right, key);
+			return (ans<= key && ans!=-1) ? ans : root.val);
+			 
 		} 
 
 		//find in left subtree if present
