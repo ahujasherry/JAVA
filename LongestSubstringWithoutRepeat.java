@@ -14,38 +14,28 @@ public class LongestSubstringWithoutRepeat {
 	{
 		if(str.isEmpty()) return 0;
 		 if(str.length()==1) return 1;
-		int len=0,start=0,end=0,res=0;
-		
-		//array to store visited and last index
-		int visited[]=new int[256];
-		for (int k = 0; k < visited.length; k++) {
-			visited[k]=-1;
-		}
-		
-		while(end!=str.length())
-		{
-			//if in set
-			
-			if(visited[str.charAt(end)]!=-1)
-			{
-				visited[str.charAt(start)]=-1;
-				start++;
-			}
-			else
-			{
-				visited[str.charAt(end)]=0;
-				len=end-start+1;
-				end++;
-				
-			}
-			
-			res=Math.max(len, res);
-	
-			
-		}
-		
-			
-		return res;
+		// Creating a set to store the last positions of occurrence
+    HashMap<Character, Integer> seen = new HashMap<>(); 
+    int maximum_length = 0;
+ 
+    // starting the inital point of window to index 0
+    int start = 0;
+ 
+    for(int end = 0; end < s.length(); end++)
+    {
+      // Checking if we have already seen the element or not
+      if(seen.containsKey(s.charAt(end)))
+      {
+        // If we have seen the number, move the start pointer
+        // to position after the last occurrence
+        start = Math.max(start, seen.get(s.charAt(end)) + 1);
+      }
+ 
+      // Updating the last seen value of the character
+      seen.put(s.charAt(end), end);
+      maximum_length = Math.max(maximum_length, end-start + 1);
+    }
+    return maximum_length;
 	}
 	
 	//average time complexity -> O(n2)
