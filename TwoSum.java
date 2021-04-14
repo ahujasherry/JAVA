@@ -38,7 +38,6 @@ public class TwoSum {
 	            {
 	            	res[0]=i;
 	            	res[1]=map.get(searchEle);
-	            	return res;
 	            
 	            }
 	            
