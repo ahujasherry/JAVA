@@ -58,13 +58,13 @@ int MatrixChainOrder(int* p, int n)
 static int MatrixChainOrder(int p[], int n) 
     { 
        
-        int m[][] = new int[n][n]; 
+        int dp[][] = new int[n][n]; 
         int i, j, k, L, q; 
   
         
         // cost is zero when multiplying one matrix. 
         for (i = 1; i < n; i++) 
-            m[i][i] = 0; 
+            dp[i][i] = 0; 
   
         // L is chain length. 
         for (L = 2; L < n; L++)  
@@ -76,17 +76,17 @@ static int MatrixChainOrder(int p[], int n)
                 if (j == n) 
                     continue; 
                 
-                m[i][j] = Integer.MAX_VALUE; 
+                dp[i][j] = Integer.MAX_VALUE; 
                 
                 for (k = i; k <= j - 1; k++)  
                 { 
-                    q = m[i][k] + m[k + 1][j] 
+                    q = dp[i][k] + dp[k + 1][j] 
                         + p[i - 1] * p[k] * p[j]; 
-                    if (q < m[i][j]) 
-                        m[i][j] = q; 
+                    if (q < dp[i][j]) 
+                        dp[i][j] = q; 
                 } 
             } 
         } 
   
-        return m[1][n - 1]; 
+        return dp[1][n - 1]; 
     } 
