@@ -16,19 +16,52 @@
 class Solution 
 {
     static int count;
-    /* in case we can modify TreeNode class, add lcount for every node while building
-    static int count;
-    public int kthSmallest(TreeNode root, int k) {
+    /* 
+  
+class Solution {
+    
+    public static void print(TreeNode root)
+    {
+        if(root==null) return;
+        print(root.left);
+        System.out.print("ele="+root.val+" ,count="+root.count);
+        System.out.println();
+        print(root.right);
         
+        
+    }
+    public int kthSmallest(TreeNode root, int k)
+    {
+        int temp=countLeft(root);
+        
+        print(root);
+        
+        return helper(root,k);
+        
+        
+    }
+    public static int countLeft(TreeNode root)
+    {
+        if(root==null) return 0;
+        
+        int lcount=countLeft(root.left);
+        root.count=lcount;
+        return lcount+ countLeft(root.right);
+        
+    }
+    public static int helper(TreeNode root, int k)
+    {
         if(root==null) return 0;
         
         if(root.count+1 == k ) return root.val;
-            
-        if(root.count+1 >k ) return kthSmallest(root.left,k);
         
-        else  return kthSmallest(root.right,k-root.count-1);
+         if(root.count+1 >k ) return helper(root.left,k);
         
-    }*/
+        else  return helper(root.right,k-root.count-1);
+        
+    }
+   
+}*/
     
     //in order DFS
     public int kthSmallest(TreeNode root, int k)
