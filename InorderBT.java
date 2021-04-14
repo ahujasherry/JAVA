@@ -26,13 +26,6 @@ class Solution {
         //if null
         if(root==null) return list;
         
-        
-        
-        //push root to stack
-        stack.push(root);
-        
-        root=root.left;
-        
         //keep putting left pointers
         while(root!=null || !stack.isEmpty())
         {
@@ -44,9 +37,9 @@ class Solution {
             }
             
             //if leaf node, go to right of parent/top after printing current root
-            root=stack.pop();    
-            list.add(root.val);
-            root=root.right;
+            TreeNode top=stack.pop();    
+            list.add(top.val);
+            if(top.right!=null) root=top.right;
             
             
         }
